@@ -1,0 +1,147 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/maven-v4_0_0.xsd">
+
+  <modelVersion>4.0.0</modelVersion>
+
+  <groupId>org.ab</groupId>
+  <artifactId>save-hl7-messages</artifactId>
+  <packaging>jar</packaging>
+  <version>1.0-SNAPSHOT</version>
+
+  <name>Save hl7 messages to sql database</name>
+
+  <properties>
+    <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+    <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
+    <log4j2-version>2.13.3</log4j2-version>
+    <maven.compiler.source>1.11</maven.compiler.source>
+    <maven.compiler.target>1.11</maven.compiler.target>
+  </properties>
+
+  <dependencyManagement>
+    <dependencies>
+      <!-- Camel BOM -->
+      <dependency>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-bom</artifactId>
+        <version>3.11.1</version>
+        <scope>import</scope>
+        <type>pom</type>
+      </dependency>
+    </dependencies>
+  </dependencyManagement>
+
+  <dependencies>
+
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core</artifactId>
+      <version>3.12.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-main</artifactId>
+      <version>3.12.0-SNAPSHOT</version>
+    </dependency>
+
+<!--    &lt;!&ndash; logging &ndash;&gt;-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.logging.log4j</groupId>-->
+<!--      <artifactId>log4j-slf4j-impl</artifactId>-->
+<!--      <scope>runtime</scope>-->
+<!--      <version>${log4j2-version}</version>-->
+<!--    </dependency>-->
+
+    <!-- testing -->
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-test</artifactId>
+      <scope>test</scope>
+      <version>3.11.1</version>
+    </dependency>
+
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-fhir-starter</artifactId>
+      <version>3.12.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel.springboot</groupId>
+      <artifactId>camel-hl7-starter</artifactId>
+      <version>3.12.0-SNAPSHOT</version>
+    </dependency>
+    <dependency>
+      <groupId>ca.uhn.hapi</groupId>
+      <artifactId>hapi-base</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>ca.uhn.hapi</groupId>
+      <artifactId>hapi-structures-v24</artifactId>
+      <version>2.3</version>
+    </dependency>
+    <dependency>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-beans</artifactId>
+      <version>5.3.9</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-api</artifactId>
+      <version>3.11.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core-model</artifactId>
+      <version>3.11.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.maven.plugins</groupId>
+      <artifactId>maven-compiler-plugin</artifactId>
+      <version>3.8.1</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-sql</artifactId>
+      <version>3.11.1</version>
+    </dependency>
+  </dependencies>
+
+  <build>
+    <defaultGoal>install</defaultGoal>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <version>3.8.1</version>
+        <configuration>
+          <source>${java.version}</source>
+          <target>${java.version}</target>
+        </configuration>
+      </plugin>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-resources-plugin</artifactId>
+        <version>3.2.0</version>
+        <configuration>
+          <encoding>UTF-8</encoding>
+        </configuration>
+      </plugin>
+
+      <!-- Allows the example to be run via 'mvn camel:run' -->
+      <plugin>
+        <groupId>org.apache.camel</groupId>
+        <artifactId>camel-maven-plugin</artifactId>
+        <version>3.11.1</version>
+        <configuration>
+          <logClasspath>true</logClasspath>
+          <mainClass>archive.MainApp</mainClass>
+        </configuration>
+      </plugin>
+
+    </plugins>
+  </build>
+
+</project>
