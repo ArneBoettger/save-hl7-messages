@@ -1,4 +1,4 @@
-CREATE TABLE `patientsdb`.`patients` (
+CREATE TABLE IF NOT EXISTS `patientsdb`.`patients` (
   `pid` VARCHAR(45) NOT NULL,
   `surname` VARCHAR(45) NOT NULL,
   `name` VARCHAR(45) NOT NULL,

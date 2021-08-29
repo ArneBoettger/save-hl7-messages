@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="hapi-fhir-structures-dstu3-4.1.0">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/ca/uhn/hapi/fhir/hapi-fhir-structures-dstu3/4.1.0/hapi-fhir-structures-dstu3-4.1.0.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

@@ -1,9 +1,0 @@
-<component name="libraryTable">
-  <library name="camel-spring-3.11.11">
-    <CLASSES>
-      <root url="jar://$MAVEN_REPOSITORY$/org/apache/camel/camel-spring/3.11.1/camel-spring-3.11.1.jar!/" />
-    </CLASSES>
-    <JAVADOC />
-    <SOURCES />
-  </library>
-</component>

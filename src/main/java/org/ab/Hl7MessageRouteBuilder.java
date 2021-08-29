@@ -11,7 +11,7 @@ public class Hl7MessageRouteBuilder extends RouteBuilder {
     @Override
     public void configure() {
 
-        from("file:{{input}}?move={{file-archive}}/${file:name")
+        from("file:C:/messages/newMessages?move=C:/messages/archive/${file:name}")
                 .onException(HL7Exception.class)
                     .handled(true)
                     .log(LoggingLevel.ERROR, "Error unmarshalling ${file:name} ${exception.message}")

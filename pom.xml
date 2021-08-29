@@ -9,14 +9,15 @@
   <packaging>jar</packaging>
   <version>1.0-SNAPSHOT</version>
 
-  <name>Save hl7 messages to sql database</name>
+  <name>Save hl7 messages to sql table</name>
 
   <properties>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
     <project.reporting.outputEncoding>UTF-8</project.reporting.outputEncoding>
-    <log4j2-version>2.13.3</log4j2-version>
     <maven.compiler.source>1.11</maven.compiler.source>
     <maven.compiler.target>1.11</maven.compiler.target>
+    <mysql.driver.version>8.0.20</mysql.driver.version>
+    <camel.version>3.11.1</camel.version>
   </properties>
 
   <dependencyManagement>
@@ -25,7 +26,7 @@
       <dependency>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-bom</artifactId>
-        <version>3.11.1</version>
+        <version>${camel.version}</version>
         <scope>import</scope>
         <type>pom</type>
       </dependency>
@@ -36,41 +37,56 @@
 
     <dependency>
       <groupId>org.apache.camel</groupId>
+      <artifactId>camel-api</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
       <artifactId>camel-core</artifactId>
-      <version>3.12.0-SNAPSHOT</version>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>org.apache.camel</groupId>
+      <artifactId>camel-core-model</artifactId>
+      <version>${camel.version}</version>
     </dependency>
     <dependency>
       <groupId>org.apache.camel</groupId>
       <artifactId>camel-main</artifactId>
-      <version>3.12.0-SNAPSHOT</version>
+      <version>${camel.version}</version>
     </dependency>
-
-<!--    &lt;!&ndash; logging &ndash;&gt;-->
-<!--    <dependency>-->
-<!--      <groupId>org.apache.logging.log4j</groupId>-->
-<!--      <artifactId>log4j-slf4j-impl</artifactId>-->
-<!--      <scope>runtime</scope>-->
-<!--      <version>${log4j2-version}</version>-->
-<!--    </dependency>-->
-
-    <!-- testing -->
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-test</artifactId>
-      <scope>test</scope>
-      <version>3.11.1</version>
+      <artifactId>camel-sql</artifactId>
+      <version>${camel.version}</version>
+    </dependency>
+    <dependency>
+      <groupId>mysql</groupId>
+      <artifactId>mysql-connector-java</artifactId>
+      <version>5.1.46</version>
     </dependency>
 
+<!--    <dependency>-->
+<!--      <groupId>org.apache.camel.springboot</groupId>-->
+<!--      <artifactId>camel-fhir-starter</artifactId>-->
+<!--      <version>${camel.version}</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.apache.camel.springboot</groupId>-->
+<!--      <artifactId>camel-hl7-starter</artifactId>-->
+<!--      <version>${camel.version}</version>-->
+<!--    </dependency>-->
+<!--    <dependency>-->
+<!--      <groupId>org.springframework</groupId>-->
+<!--      <artifactId>spring-core</artifactId>-->
+<!--      <version>5.3.9</version>-->
+<!--    </dependency>-->
     <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-fhir-starter</artifactId>
-      <version>3.12.0-SNAPSHOT</version>
+      <groupId>org.springframework</groupId>
+      <artifactId>spring-context</artifactId>
+      <version>5.3.9</version>
     </dependency>
-    <dependency>
-      <groupId>org.apache.camel.springboot</groupId>
-      <artifactId>camel-hl7-starter</artifactId>
-      <version>3.12.0-SNAPSHOT</version>
-    </dependency>
+
     <dependency>
       <groupId>ca.uhn.hapi</groupId>
       <artifactId>hapi-base</artifactId>
@@ -81,30 +97,32 @@
       <artifactId>hapi-structures-v24</artifactId>
       <version>2.3</version>
     </dependency>
+
     <dependency>
-      <groupId>org.springframework</groupId>
-      <artifactId>spring-beans</artifactId>
-      <version>5.3.9</version>
+      <groupId>commons-dbcp</groupId>
+      <artifactId>commons-dbcp</artifactId>
+      <version>1.2.2</version>
     </dependency>
+    <dependency>
+      <groupId>commons-pool</groupId>
+      <artifactId>commons-pool</artifactId>
+      <version>1.6</version>
+    </dependency>
+
+    <!-- logging -->
+    <dependency>
+      <groupId>org.apache.logging.log4j</groupId>
+      <artifactId>log4j-slf4j-impl</artifactId>
+      <scope>runtime</scope>
+      <version>2.13.3</version>
+    </dependency>
+
+    <!-- testing -->
     <dependency>
       <groupId>org.apache.camel</groupId>
-      <artifactId>camel-api</artifactId>
-      <version>3.11.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-core-model</artifactId>
-      <version>3.11.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.maven.plugins</groupId>
-      <artifactId>maven-compiler-plugin</artifactId>
-      <version>3.8.1</version>
-    </dependency>
-    <dependency>
-      <groupId>org.apache.camel</groupId>
-      <artifactId>camel-sql</artifactId>
-      <version>3.11.1</version>
+      <artifactId>camel-test</artifactId>
+      <scope>test</scope>
+      <version>${camel.version}</version>
     </dependency>
   </dependencies>
 
@@ -134,10 +152,10 @@
       <plugin>
         <groupId>org.apache.camel</groupId>
         <artifactId>camel-maven-plugin</artifactId>
-        <version>3.11.1</version>
+        <version>${camel.version}</version>
         <configuration>
           <logClasspath>true</logClasspath>
-          <mainClass>archive.MainApp</mainClass>
+          <mainClass>org.ab.MainApp</mainClass>
         </configuration>
       </plugin>
 

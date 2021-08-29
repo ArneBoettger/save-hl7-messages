@@ -20,7 +20,8 @@
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
         <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost/patientsdb" />
+<!--        <property name="url" value="jdbc:mysql://localhost:3306/patientsdb?useSSL=true&amp;sslMode=VERIFY_IDENTITY&amp;trustCertificateKeyStoreUrl=file%3A%2Fetc%2Fssl%2Fcerts%2Fjava%2Fcacerts&amp;trustCertificateKeyStorePassword=changeit&amp;enabledTLSProtocols=TLSv1.2&amp;useUnicode=true&amp;characterEncoding=utf8" />-->
+        <property name="url" value="jdbc:mysql://localhost:3306/patientsdb?autoReconnect=true&amp;useSSL=false"/>
         <property name="username" value="root" />
         <property name="password" value="password" />
     </bean>
