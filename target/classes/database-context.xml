@@ -9,12 +9,18 @@
             http://camel.apache.org/schema/spring
             http://camel.apache.org/schema/spring/camel-spring.xsd">
 
+    <bean class="org.springframework.beans.factory.config.PropertyPlaceholderConfigurer">
+        <property name="location">
+            <value>classpath:application.properties</value>
+        </property>
+    </bean>
+
     <bean id="dataSource" class="org.apache.commons.dbcp.BasicDataSource"
           destroy-method="close">
-        <property name="driverClassName" value="com.mysql.jdbc.Driver" />
-        <property name="url" value="jdbc:mysql://localhost:3306/patientsdb?autoReconnect=true&amp;useSSL=false"/>
-        <property name="username" value="root" />
-        <property name="password" value="password" />
+        <property name="driverClassName" value="${datasource.driver}" />
+        <property name="url" value="${datasource.url}"/>
+        <property name="username" value="${datasource.username}" />
+        <property name="password" value="${datasource.password}" />
     </bean>
 
     <jdbc:initialize-database>
@@ -29,7 +35,7 @@
 
     <camelContext id="patientsContext" xmlns="http://camel.apache.org/schema/spring">
 
-        <propertyPlaceholder id="placeholder" location="classpath:config.properties" />
+        <propertyPlaceholder id="placeholder" location="classpath:application.properties" />
         <routeBuilder ref="patientsRouter" />
 
     </camelContext>

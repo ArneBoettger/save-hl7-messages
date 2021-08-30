@@ -33,7 +33,7 @@ public class MainApp {
 
     private static int getExecutionDuration() throws IOException {
         int seconds;
-        try (InputStream input = MainApp.class.getClassLoader().getResourceAsStream("config.properties")) {
+        try (InputStream input = MainApp.class.getClassLoader().getResourceAsStream("application.properties")) {
             Properties prop = new Properties();
             prop.load(input);
             seconds = Integer.parseInt(prop.getProperty("execution.time"));
