@@ -1,7 +1,5 @@
 package org.ab;
 
-import ca.uhn.hl7v2.DefaultHapiContext;
-import ca.uhn.hl7v2.HapiContext;
 import org.apache.camel.Exchange;
 import org.apache.camel.Processor;
 
@@ -10,8 +8,7 @@ import java.nio.file.Files;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Hl7ToSqlProcessor2 implements Processor {
-    private static HapiContext context = new DefaultHapiContext();
+public class Hl7ToStringToSqlProcessor implements Processor {
 
     @Override
     public void process(Exchange exchange) throws Exception {

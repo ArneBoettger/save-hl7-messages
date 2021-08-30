@@ -10,7 +10,7 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.Map;
 
-public class Hl7ToSqlProcessor implements Processor {
+public class Hl7ToPidToSqlProcessor implements Processor {
 
     public void process(Exchange exchange) throws Exception {
         ORU_R01 msg = exchange.getIn().getBody(ORU_R01.class);

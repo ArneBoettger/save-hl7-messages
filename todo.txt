@@ -1,0 +1,25 @@
+Aufgabenstellung:
+
+Bitte importieren Sie folgende Patientendaten aus der HL7 Datei in eine beliebige Datenbank:
+Name, Vorname, PatientId (P_72610), Geburtsdatum
+ 
+Für die Verarbeitung soll Apache Camel verwendet werden.
+Die Datei soll aus einem konfigurierbaren Verzeichnis eingelesen werden und nach der Verarbeitung in ein konfigurierbares Verzeichnis verschoben werden.
+Außerdem soll ein JUnit Test vorhanden sein.
+ 
+Dokumentation und Beispiele:
+https://camel.apache.org/
+https://github.com/apache/camel-spring-boot-examples
+https://camel.apache.org/components/latest/file-component.html
+https://camel.apache.org/components/3.4.x/dataformats/hl7-dataformat.html
+https://hl7-definition.caristix.com/v2/HL7v2.4/Segments/PID
+
+
+TODO:
+
+gesicherte verbindung ssl etc
+Hl7ToSqlProcessor autowired
+verzeichniss konfigurierbar machen
+java.lang.IllegalThreadStateException am Ende der App
+
+<property name="url" value="jdbc:mysql://localhost:3306/patientsdb?useSSL=true&amp;sslMode=VERIFY_IDENTITY&amp;trustCertificateKeyStoreUrl=file%3A%2Fetc%2Fssl%2Fcerts%2Fjava%2Fcacerts&amp;trustCertificateKeyStorePassword=changeit&amp;enabledTLSProtocols=TLSv1.2&amp;useUnicode=true&amp;characterEncoding=utf8" />

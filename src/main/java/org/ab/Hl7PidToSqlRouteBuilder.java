@@ -5,9 +5,9 @@ import org.apache.camel.LoggingLevel;
 import org.apache.camel.builder.RouteBuilder;
 import org.apache.camel.component.hl7.HL7DataFormat;
 
-public class Hl7MessageRouteBuilder extends RouteBuilder {
+public class Hl7PidToSqlRouteBuilder extends RouteBuilder {
 
-    private static Hl7ToSqlProcessor processor = new Hl7ToSqlProcessor();
+    private static Hl7ToPidToSqlProcessor processor = new Hl7ToPidToSqlProcessor();
 
     @Override
     public void configure() {
@@ -22,11 +22,9 @@ public class Hl7MessageRouteBuilder extends RouteBuilder {
                     .log(LoggingLevel.ERROR, "Error unmarshalling ${file:name} ${exception.message}")
                     .end()
                 .log("Catch patient information")
-                // unmarshall file to hl7 message
                 .unmarshal(hl7)
 //                .validate(messageConforms())
                 .log("Prepare data for sql insertion")
-                // map HLV2 patient to patient information map
                 .process(processor)
                 .log("Insert data in sql table")
                 .to("sqlComponent:{{sql.insertPatient}}");
