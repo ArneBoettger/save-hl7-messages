@@ -151,8 +151,20 @@
         <configuration>
           <logClasspath>true</logClasspath>
           <mainClass>org.ab.MainApp</mainClass>
+<!--          <cleanupDaemonThreads>false</cleanupDaemonThreads>-->
         </configuration>
       </plugin>
+      <!-- Allows the example to be run via 'mvn compile exec:java' -->
+<!--      <plugin>-->
+<!--        <groupId>org.codehaus.mojo</groupId>-->
+<!--        <artifactId>exec-maven-plugin</artifactId>-->
+<!--        <version>3.0.0</version>-->
+<!--        <configuration>-->
+<!--          <logClasspath>true</logClasspath>-->
+<!--          <mainClass>org.ab.MainApp</mainClass>-->
+<!--          <cleanupDaemonThreads>false</cleanupDaemonThreads>-->
+<!--        </configuration>-->
+<!--      </plugin>-->
 
     </plugins>
   </build>

@@ -4,6 +4,10 @@ import org.apache.camel.CamelContext;
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;
 
+import java.io.IOException;
+import java.io.InputStream;
+import java.util.Properties;
+
 public class MainApp {
 
     public static void main(String[] args) {
@@ -16,11 +20,24 @@ public class MainApp {
 //            context.getStreamCachingStrategy().setBufferSize(16 * 1024);
 //            context.setStreamCaching(true);
 
-            context.start();
+            for (int i = 0; i < getExecutionDuration(); i++) {
+                context.start();
+                Thread.sleep(1000);
+            }
         } catch (Exception e) {
             e.printStackTrace();
         } finally {
             System.exit(0);
         }
+    }
+
+    private static int getExecutionDuration() throws IOException {
+        int seconds = 0;
+        try (InputStream input = MainApp.class.getClassLoader().getResourceAsStream("config.properties")) {
+            Properties prop = new Properties();
+            prop.load(input);
+            seconds = Integer.valueOf(prop.getProperty("execution.time"));
+        }
+        return seconds;
     }
 }

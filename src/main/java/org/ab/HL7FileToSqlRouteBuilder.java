@@ -8,7 +8,6 @@ public class HL7FileToSqlRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() {
-
         from("file:{{file.input}}?move={{file.archive}}/${file:name}")
                 .log("Reading patient information from hl7 file and prepare sql insert information")
                 .process(processor)
