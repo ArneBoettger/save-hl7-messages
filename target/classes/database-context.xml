@@ -17,8 +17,7 @@
         <property name="password" value="password" />
     </bean>
 
-    <jdbc:initialize-database data-source="dataSource"
-                              enabled="true">
+    <jdbc:initialize-database>
         <jdbc:script location="classpath:db-schema.sql" />
     </jdbc:initialize-database>
 
