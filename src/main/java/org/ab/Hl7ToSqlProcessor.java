@@ -27,7 +27,6 @@ public class Hl7ToSqlProcessor implements Processor {
         answer.put("name", name);
         answer.put("birthdate", birthdate);
         exchange.getIn().setBody(answer);
-        System.out.println("Test");
 
 //        ORU_R01 msg = exchange.getIn().getBody(ORU_R01.class);
 //        final PID pid = msg.getPATIENT_RESULT().getPATIENT().getPID();
