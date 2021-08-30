@@ -30,7 +30,7 @@
 
     <camelContext id="patientsContext" xmlns="http://camel.apache.org/schema/spring">
 
-        <propertyPlaceholder id="placeholder" location="classpath:sql.properties" />
+        <propertyPlaceholder id="placeholder" location="classpath:config.properties" />
         <routeBuilder ref="patientsRouter" />
 
     </camelContext>
