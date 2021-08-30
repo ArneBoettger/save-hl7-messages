@@ -11,11 +11,11 @@ public class Hl7PidToSqlRouteBuilder extends RouteBuilder {
 
     @Override
     public void configure() {
-        // Turn off validation because of problematic phone information
+        // Turn off validation because of phone informations throwing exceptions
         HL7DataFormat hl7 = new HL7DataFormat();
         hl7.setValidate(false);
 
-        from("file:C:/messages/newMessages?move=C:/messages/archive/${file:name}")
+        from("file:{{file.input}}?move={{file.archive}}/${file:name}")
 //                .streamCaching()
                 .onException(HL7Exception.class)
                     .handled(true)
